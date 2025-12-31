@@ -65,16 +65,16 @@
         .header-decoration:nth-child(3) { bottom: 10px; left: 50px; }
         .header-decoration:nth-child(4) { bottom: 10px; right: 50px; }
 
-        /* 主内容区 */
+        /* 主内容区 - 调整顺序：游戏区在前，状态面板在后 */
         .main-content {
             display: grid;
-            grid-template-columns: 320px 1fr;
+            grid-template-columns: 1fr 320px; /* 修改：游戏区在前，状态面板在后 */
             gap: 25px;
             height: calc(100vh - 180px);
             min-height: 700px;
         }
 
-        /* 左侧面板 */
+        /* 右侧状态面板 */
         .side-panel {
             background: rgba(255, 255, 255, 0.98);
             border-radius: 15px;
@@ -107,11 +107,11 @@
             background: #f8f9fa;
             border-radius: 10px;
             border-left: 5px solid #4d9feb;
-            transition: transform 0.2s;
+            transition: transform 0.05s; /* 缩短响应时间 */
         }
 
         .stat-item:hover {
-            transform: translateX(5px);
+            transform: translateX(3px); /* 减少移动距离 */
         }
 
         .stat-label {
@@ -146,13 +146,13 @@
             align-items: center;
             gap: 15px;
             cursor: pointer;
-            transition: all 0.3s;
+            transition: all 0.05s; /* 缩短响应时间 */
             border: 2px solid transparent;
         }
 
         .level-item:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transform: translateY(-1px); /* 减少移动距离 */
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
 
         .level-item.active {
@@ -206,7 +206,7 @@
             flex-shrink: 0;
         }
 
-        /* 右侧游戏区 */
+        /* 左侧游戏区 */
         .game-area {
             background: rgba(255, 255, 255, 0.98);
             border-radius: 15px;
@@ -233,7 +233,7 @@
             color: #ff6b6b;
             font-size: 2.2rem;
             margin-bottom: 20px;
-            animation: fadeIn 1s;
+            animation: fadeIn 0.3s; /* 缩短动画时间 */
         }
 
         .welcome-subtitle {
@@ -261,7 +261,7 @@
             padding: 30px 20px;
             box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
             cursor: pointer;
-            transition: all 0.3s;
+            transition: all 0.05s; /* 缩短响应时间 */
             border: 3px solid transparent;
             text-align: center;
             height: 100%;
@@ -272,8 +272,8 @@
         }
 
         .grid-item:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+            transform: translateY(-3px); /* 减少移动距离 */
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
         }
 
         .grid-item.active {
@@ -302,7 +302,7 @@
             font-size: 2.5rem;
             margin: 0 auto 20px;
             box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
-            transition: all 0.3s;
+            transition: all 0.05s; /* 缩短响应时间 */
         }
 
         .level-1 .grid-icon { background: linear-gradient(135deg, #4caf50, #8bc34a); }
@@ -470,7 +470,7 @@
             padding: 20px;
             font-size: 1.1rem;
             cursor: pointer;
-            transition: all 0.3s;
+            transition: all 0.05s; /* 缩短响应时间 */
             display: flex;
             align-items: center;
             gap: 15px;
@@ -481,8 +481,8 @@
 
         .option:hover {
             background: #e1f0ff;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transform: translateY(-1px); /* 减少移动距离 */
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
 
         .option.selected {
@@ -540,7 +540,7 @@
             align-items: center;
             justify-content: center;
             cursor: pointer;
-            transition: all 0.3s;
+            transition: all 0.05s; /* 缩短响应时间 */
             font-size: 2rem;
             font-weight: bold;
             box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
@@ -558,13 +558,13 @@
         }
 
         .true-false-option:hover {
-            transform: translateY(-3px) scale(1.05);
-            box-shadow: 0 12px 20px rgba(0, 0, 0, 0.15);
+            transform: translateY(-2px) scale(1.03); /* 减少移动距离 */
+            box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
         }
 
         .true-false-option.selected {
             border-color: #ffcc00;
-            transform: scale(1.05);
+            transform: scale(1.03);
             box-shadow: 0 0 0 3px rgba(255, 204, 0, 0.3);
         }
 
@@ -596,7 +596,7 @@
             font-weight: bold;
             font-size: 1.1rem;
             cursor: pointer;
-            transition: all 0.3s;
+            transition: all 0.05s; /* 缩短响应时间 */
             display: inline-flex;
             align-items: center;
             gap: 10px;
@@ -611,8 +611,8 @@
         }
 
         .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 16px rgba(77, 159, 235, 0.4);
+            transform: translateY(-1px); /* 减少移动距离 */
+            box-shadow: 0 4px 8px rgba(77, 159, 235, 0.4);
         }
 
         .btn-success {
@@ -622,8 +622,8 @@
         }
 
         .btn-success:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 16px rgba(76, 175, 80, 0.4);
+            transform: translateY(-1px); /* 减少移动距离 */
+            box-shadow: 0 4px 8px rgba(76, 175, 80, 0.4);
         }
 
         .btn-warning {
@@ -633,8 +633,8 @@
         }
 
         .btn-warning:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 16px rgba(255, 152, 0, 0.4);
+            transform: translateY(-1px); /* 减少移动距离 */
+            box-shadow: 0 4px 8px rgba(255, 152, 0, 0.4);
         }
 
         .btn-danger {
@@ -644,8 +644,8 @@
         }
 
         .btn-danger:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 16px rgba(244, 67, 54, 0.4);
+            transform: translateY(-1px); /* 减少移动距离 */
+            box-shadow: 0 4px 8px rgba(244, 67, 54, 0.4);
         }
 
         .btn:disabled {
@@ -676,17 +676,17 @@
 
         .timer-container.warning {
             background: #ff9800;
-            animation: pulse 1s infinite;
+            animation: pulse 0.5s infinite; /* 缩短动画时间 */
         }
 
         .timer-container.danger {
             background: #f44336;
-            animation: pulse 0.5s infinite;
+            animation: pulse 0.3s infinite; /* 缩短动画时间 */
         }
 
         @keyframes pulse {
             0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.05); }
+            50% { transform: scale(1.03); } /* 减少缩放幅度 */
         }
 
         /* 第三关特殊样式 */
@@ -719,18 +719,18 @@
             justify-content: center;
             font-size: 1.5rem;
             box-shadow: 0 4px 8px rgba(77, 159, 235, 0.3);
-            transition: all 0.3s;
+            transition: all 0.05s; /* 缩短响应时间 */
         }
 
         .shield.active {
             background: #ffcc00;
-            animation: shieldGlow 2s infinite;
-            transform: scale(1.1);
+            animation: shieldGlow 1s infinite; /* 缩短动画时间 */
+            transform: scale(1.05); /* 减少缩放幅度 */
         }
 
         @keyframes shieldGlow {
-            0%, 100% { box-shadow: 0 0 15px #ffcc00; }
-            50% { box-shadow: 0 0 25px #ffcc00; }
+            0%, 100% { box-shadow: 0 0 10px #ffcc00; }
+            50% { box-shadow: 0 0 15px #ffcc00; }
         }
 
         /* 结果界面 */
@@ -747,13 +747,13 @@
         .result-icon {
             font-size: 6rem;
             margin: 20px 0;
-            animation: bounceIn 1s;
+            animation: bounceIn 0.5s; /* 缩短动画时间 */
         }
 
         @keyframes bounceIn {
             0% { transform: scale(0.3); opacity: 0; }
             50% { transform: scale(1.05); }
-            70% { transform: scale(0.9); }
+            70% { transform: scale(0.95); }
             100% { transform: scale(1); opacity: 1; }
         }
 
@@ -830,12 +830,12 @@
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
             border-left: 8px solid #4d9feb;
             cursor: pointer;
-            transition: all 0.3s;
+            transition: all 0.05s; /* 缩短响应时间 */
         }
 
         .round-card:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+            transform: translateY(-2px); /* 减少移动距离 */
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
         }
 
         .round-card.locked {
@@ -937,18 +937,18 @@
 
         /* 动画 */
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(15px); }
+            from { opacity: 0; transform: translateY(10px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
         .animate-fadein {
-            animation: fadeIn 0.5s forwards;
+            animation: fadeIn 0.3s forwards; /* 缩短动画时间 */
         }
 
         /* 响应式设计 */
         @media (max-width: 1200px) {
             .main-content {
-                grid-template-columns: 280px 1fr;
+                grid-template-columns: 1fr 280px; /* 保持顺序 */
             }
         }
 
@@ -1093,94 +1093,9 @@
             <div class="subtitle">二年级上册 · 三级难度挑战 · 边读边玩</div>
         </div>
 
-        <!-- 主内容区 -->
+        <!-- 主内容区 - 调整顺序：游戏区在前，状态面板在后 -->
         <div class="main-content">
-            <!-- 左侧状态面板 -->
-            <div class="side-panel">
-                <div class="player-stats">
-                    <div class="stats-title">📊 我的数据</div>
-                    <div class="stat-item">
-                        <div class="stat-label">
-                            <i class="fas fa-user-graduate"></i>
-                            <span>当前等级</span>
-                        </div>
-                        <div class="stat-value" id="currentLevel">新手</div>
-                    </div>
-                    <div class="stat-item">
-                        <div class="stat-label">
-                            <i class="fas fa-coins"></i>
-                            <span>知识金币</span>
-                        </div>
-                        <div class="stat-value" id="goldCoins">0</div>
-                    </div>
-                    <div class="stat-item">
-                        <div class="stat-label">
-                            <i class="fas fa-star"></i>
-                            <span>智慧星</span>
-                        </div>
-                        <div class="stat-value" id="wisdomStars">0</div>
-                    </div>
-                    <div class="stat-item">
-                        <div class="stat-label">
-                            <i class="fas fa-heart"></i>
-                            <span>最高连胜</span>
-                        </div>
-                        <div class="stat-value" id="maxStreak">0</div>
-                    </div>
-                    <div class="stat-item">
-                        <div class="stat-label">
-                            <i class="fas fa-check-circle"></i>
-                            <span>完成度</span>
-                        </div>
-                        <div class="stat-value" id="completionRate">0%</div>
-                    </div>
-                    <div class="stat-item">
-                        <div class="stat-label">
-                            <i class="fas fa-clock"></i>
-                            <span>总用时</span>
-                        </div>
-                        <div class="stat-value" id="totalTime">0秒</div>
-                    </div>
-                </div>
-
-                <div class="game-progress">
-                    <div class="progress-title">🗺️ 闯关地图</div>
-                    <div class="level-item level-1 active" data-level="1">
-                        <div class="level-icon">1</div>
-                        <div class="level-info">
-                            <div class="level-name">新手训练营</div>
-                            <div class="level-desc">建立信心，熟悉题型</div>
-                        </div>
-                        <div class="level-status" id="level1-status">进行中</div>
-                    </div>
-                    <div class="level-item level-2" data-level="2">
-                        <div class="level-icon">2</div>
-                        <div class="level-info">
-                            <div class="level-name">极限挑战</div>
-                            <div class="level-desc">每题限时10秒</div>
-                        </div>
-                        <div class="level-status" id="level2-status">未解锁</div>
-                    </div>
-                    <div class="level-item level-3" data-level="3">
-                        <div class="level-icon">3</div>
-                        <div class="level-info">
-                            <div class="level-name">巅峰对决</div>
-                            <div class="level-desc">终极挑战，策略博弈</div>
-                        </div>
-                        <div class="level-status" id="level3-status">未解锁</div>
-                    </div>
-                    <div class="level-item level-4" data-level="4">
-                        <div class="level-icon">4</div>
-                        <div class="level-info">
-                            <div class="level-name">随机大挑战</div>
-                            <div class="level-desc">60秒挑战40道题</div>
-                        </div>
-                        <div class="level-status" id="level4-status">未解锁</div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- 右侧游戏区 -->
+            <!-- 左侧游戏区 -->
             <div class="game-area">
                 <!-- 首页 -->
                 <div id="home-screen">
@@ -1416,6 +1331,91 @@
                     </div>
                     <div id="wrong-questions-list">
                         <!-- 错题将通过JavaScript动态生成 -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- 右侧状态面板 -->
+            <div class="side-panel">
+                <div class="player-stats">
+                    <div class="stats-title">📊 我的数据</div>
+                    <div class="stat-item">
+                        <div class="stat-label">
+                            <i class="fas fa-user-graduate"></i>
+                            <span>当前等级</span>
+                        </div>
+                        <div class="stat-value" id="currentLevel">新手</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-label">
+                            <i class="fas fa-coins"></i>
+                            <span>知识金币</span>
+                        </div>
+                        <div class="stat-value" id="goldCoins">0</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-label">
+                            <i class="fas fa-star"></i>
+                            <span>智慧星</span>
+                        </div>
+                        <div class="stat-value" id="wisdomStars">0</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-label">
+                            <i class="fas fa-heart"></i>
+                            <span>最高连胜</span>
+                        </div>
+                        <div class="stat-value" id="maxStreak">0</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-label">
+                            <i class="fas fa-check-circle"></i>
+                            <span>完成度</span>
+                        </div>
+                        <div class="stat-value" id="completionRate">0%</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-label">
+                            <i class="fas fa-clock"></i>
+                            <span>总用时</span>
+                        </div>
+                        <div class="stat-value" id="totalTime">0秒</div>
+                    </div>
+                </div>
+
+                <div class="game-progress">
+                    <div class="progress-title">🗺️ 闯关地图</div>
+                    <div class="level-item level-1 active" data-level="1">
+                        <div class="level-icon">1</div>
+                        <div class="level-info">
+                            <div class="level-name">新手训练营</div>
+                            <div class="level-desc">建立信心，熟悉题型</div>
+                        </div>
+                        <div class="level-status" id="level1-status">进行中</div>
+                    </div>
+                    <div class="level-item level-2" data-level="2">
+                        <div class="level-icon">2</div>
+                        <div class="level-info">
+                            <div class="level-name">极限挑战</div>
+                            <div class="level-desc">每题限时10秒</div>
+                        </div>
+                        <div class="level-status" id="level2-status">未解锁</div>
+                    </div>
+                    <div class="level-item level-3" data-level="3">
+                        <div class="level-icon">3</div>
+                        <div class="level-info">
+                            <div class="level-name">巅峰对决</div>
+                            <div class="level-desc">终极挑战，策略博弈</div>
+                        </div>
+                        <div class="level-status" id="level3-status">未解锁</div>
+                    </div>
+                    <div class="level-item level-4" data-level="4">
+                        <div class="level-icon">4</div>
+                        <div class="level-info">
+                            <div class="level-name">随机大挑战</div>
+                            <div class="level-desc">60秒挑战40道题</div>
+                        </div>
+                        <div class="level-status" id="level4-status">未解锁</div>
                     </div>
                 </div>
             </div>
@@ -2490,7 +2490,7 @@
             accuracyElement.textContent = '0%';
         }
 
-        // 加载题目
+        // 加载题目 - 添加双击功能
         function loadQuestion(index) {
             const question = gameState.currentQuestions[index];
             
@@ -2524,6 +2524,10 @@
                         <div class="option-text">${option}</div>
                     `;
                     
+                    let clickTimer = 0;
+                    let clickCount = 0;
+                    
+                    // 单击选择
                     optionElement.addEventListener('click', function() {
                         if (gameState.questionStatus[gameState.currentQuestionIndex] !== 'unanswered') {
                             return;
@@ -2561,6 +2565,26 @@
                             submitBtn.disabled = gameState.userAnswers[gameState.currentQuestionIndex] === null;
                         }
                     });
+                    
+                    // 双击提交功能（仅限单选题）
+                    if (question.type === "single") {
+                        optionElement.addEventListener('dblclick', function() {
+                            if (gameState.questionStatus[gameState.currentQuestionIndex] !== 'unanswered' ||
+                                gameState.userAnswers[gameState.currentQuestionIndex] === null) {
+                                return;
+                            }
+                            
+                            // 确保当前选项被选中
+                            document.querySelectorAll('.option').forEach(opt => {
+                                opt.classList.remove('selected');
+                            });
+                            this.classList.add('selected');
+                            gameState.userAnswers[gameState.currentQuestionIndex] = i;
+                            
+                            // 立即提交
+                            setTimeout(handleSubmit, 50);
+                        });
+                    }
                     
                     optionsContainer.appendChild(optionElement);
                 });
@@ -2729,7 +2753,7 @@
                 } else {
                     finishLevel();
                 }
-            }, 1500);
+            }, 800); // 缩短等待时间
         }
 
         // 处理提交
@@ -2808,7 +2832,7 @@
             
             submitBtn.disabled = true;
             
-            // 提交答案后自动跳转
+            // 提交答案后自动跳转（缩短等待时间）
             setTimeout(() => {
                 if (currentIndex < gameState.currentQuestions.length - 1) {
                     gameState.currentQuestionIndex++;
@@ -2821,7 +2845,7 @@
                 } else {
                     finishLevel();
                 }
-            }, 1500);
+            }, 800); // 缩短等待时间
         }
 
         // 更新学习进度
