@@ -57,14 +57,15 @@
             position: absolute;
             font-size: 2.5rem;
             opacity: 0.2;
+            top: 10px;
         }
 
-        .header-decoration:nth-child(1) { top: 10px; left: 20px; }
-        .header-decoration:nth-child(2) { top: 10px; right: 20px; }
+        .header-decoration:nth-child(1) { left: 20px; }
+        .header-decoration:nth-child(2) { right: 20px; }
         .header-decoration:nth-child(3) { bottom: 10px; left: 50px; }
         .header-decoration:nth-child(4) { bottom: 10px; right: 50px; }
 
-        /* 主内容区 - 横向布局优化 */
+        /* 主内容区 */
         .main-content {
             display: grid;
             grid-template-columns: 320px 1fr;
@@ -73,7 +74,7 @@
             min-height: 700px;
         }
 
-        /* 左侧面板 - 游戏状态 */
+        /* 左侧面板 */
         .side-panel {
             background: rgba(255, 255, 255, 0.98);
             border-radius: 15px;
@@ -106,7 +107,6 @@
             background: #f8f9fa;
             border-radius: 10px;
             border-left: 5px solid #4d9feb;
-            font-size: 1rem;
             transition: transform 0.2s;
         }
 
@@ -148,7 +148,6 @@
             cursor: pointer;
             transition: all 0.3s;
             border: 2px solid transparent;
-            font-size: 0.95rem;
         }
 
         .level-item:hover {
@@ -207,7 +206,7 @@
             flex-shrink: 0;
         }
 
-        /* 右侧主游戏区 */
+        /* 右侧游戏区 */
         .game-area {
             background: rgba(255, 255, 255, 0.98);
             border-radius: 15px;
@@ -220,7 +219,7 @@
             flex-direction: column;
         }
 
-        /* 首页样式 */
+        /* 首页样式 - 四宫格布局 */
         #home-screen {
             text-align: center;
             padding: 20px 15px;
@@ -243,30 +242,59 @@
             margin-bottom: 40px;
             line-height: 1.6;
             max-width: 900px;
-            margin-left: auto;
-            margin-right: auto;
+            margin: 0 auto 40px;
         }
 
-        .game-map {
-            display: flex;
-            justify-content: space-around;
-            align-items: center;
-            margin: 40px 0;
-            position: relative;
-            padding: 0 20px;
+        /* 四宫格布局 */
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 25px;
+            margin: 30px 0;
+            max-width: 900px;
+            margin: 0 auto;
         }
 
-        .map-level {
+        .grid-item {
+            background: white;
+            border-radius: 20px;
+            padding: 30px 20px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+            transition: all 0.3s;
+            border: 3px solid transparent;
             text-align: center;
-            position: relative;
-            z-index: 2;
-            flex: 1;
-            max-width: 300px;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
         }
 
-        .map-level-icon {
-            width: 100px;
-            height: 100px;
+        .grid-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+        }
+
+        .grid-item.active {
+            border-color: #ffcc00;
+            background: linear-gradient(135deg, #fff9e6 0%, #fff 100%);
+        }
+
+        .grid-item.locked {
+            opacity: 0.6;
+            cursor: not-allowed;
+            background: linear-gradient(135deg, #f5f5f5 0%, #e0e0e0 100%);
+        }
+
+        .grid-item.locked:hover {
+            transform: none;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+        }
+
+        .grid-icon {
+            width: 80px;
+            height: 80px;
             border-radius: 50%;
             display: flex;
             align-items: center;
@@ -277,78 +305,60 @@
             transition: all 0.3s;
         }
 
-        .map-level-1 .map-level-icon { background: linear-gradient(135deg, #4caf50, #8bc34a); }
-        .map-level-2 .map-level-icon { background: linear-gradient(135deg, #ff9800, #ffb74d); }
-        .map-level-3 .map-level-icon { background: linear-gradient(135deg, #f44336, #ef5350); }
-        .map-level-4 .map-level-icon { background: linear-gradient(135deg, #9c27b0, #ba68c8); }
+        .level-1 .grid-icon { background: linear-gradient(135deg, #4caf50, #8bc34a); }
+        .level-2 .grid-icon { background: linear-gradient(135deg, #ff9800, #ffb74d); }
+        .level-3 .grid-icon { background: linear-gradient(135deg, #f44336, #ef5350); }
+        .level-4 .grid-icon { background: linear-gradient(135deg, #9c27b0, #ba68c8); }
 
-        .map-level-icon.locked {
+        .grid-item.locked .grid-icon {
             background: linear-gradient(135deg, #9e9e9e, #bdbdbd) !important;
-            opacity: 0.7;
         }
 
-        .map-level-name {
-            font-size: 1.4rem;
+        .grid-title {
+            font-size: 1.5rem;
             font-weight: bold;
             margin-bottom: 10px;
+            color: #333;
         }
 
-        .map-level-desc {
+        .grid-subtitle {
             color: #666;
-            font-size: 0.95rem;
-            max-width: 220px;
-            margin: 0 auto;
+            font-size: 1rem;
+            margin-bottom: 15px;
+        }
+
+        .grid-desc {
+            color: #888;
+            font-size: 0.9rem;
+            margin-bottom: 20px;
             line-height: 1.4;
         }
 
-        .map-path {
-            position: absolute;
-            top: 50px;
-            left: 0;
-            right: 0;
-            height: 8px;
-            background: linear-gradient(to right, #4caf50, #ff9800, #f44336, #9c27b0);
-            z-index: 1;
-        }
-
-        .start-button {
-            background: linear-gradient(to right, #ff6b6b, #ffcc00);
-            color: white;
-            border: none;
-            padding: 18px 45px;
-            font-size: 1.4rem;
-            border-radius: 50px;
-            cursor: pointer;
+        .grid-status {
+            padding: 8px 20px;
+            border-radius: 20px;
             font-weight: bold;
-            transition: all 0.3s;
+            font-size: 1rem;
             margin-top: 10px;
-            box-shadow: 0 6px 15px rgba(255, 107, 107, 0.3);
-            display: inline-flex;
-            align-items: center;
-            gap: 15px;
-            min-width: 300px;
+            width: fit-content;
         }
 
-        .start-button:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 20px rgba(255, 107, 107, 0.4);
+        .status-available {
+            background: linear-gradient(to right, #4caf50, #2e7d32);
+            color: white;
         }
 
-        .start-button:active {
-            transform: translateY(-1px);
+        .status-locked {
+            background: linear-gradient(to right, #9e9e9e, #757575);
+            color: white;
         }
 
-        .start-button.locked {
-            background: linear-gradient(to right, #9e9e9e, #bdbdbd);
-            cursor: not-allowed;
+        .status-completed {
+            background: linear-gradient(to right, #ff9800, #f57c00);
+            color: white;
         }
 
-        .start-button.locked:hover {
-            transform: none;
-            box-shadow: 0 6px 15px rgba(158, 158, 158, 0.3);
-        }
-
-        /* 游戏界面通用样式 */
+        /* 游戏界面 */
         #game-screen {
             display: none;
             flex: 1;
@@ -445,19 +455,6 @@
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
         }
 
-        /* 操作提示 */
-        .operation-hint {
-            color: #666;
-            font-size: 1rem;
-            text-align: center;
-            margin-bottom: 20px;
-            font-style: italic;
-            padding: 10px 20px;
-            background-color: #f0f9ff;
-            border-radius: 12px;
-            border-left: 4px solid #4d9feb;
-        }
-
         /* 选项区域 */
         .options-container {
             display: grid;
@@ -526,7 +523,7 @@
             background: #ff9800;
         }
 
-        /* 判断题选项 - 修复后的样式 */
+        /* 判断题选项 */
         .true-false-container {
             display: flex;
             justify-content: center;
@@ -548,7 +545,6 @@
             font-weight: bold;
             box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
             border: 5px solid transparent;
-            position: relative;
         }
 
         .true-option {
@@ -660,7 +656,7 @@
             box-shadow: none !important;
         }
 
-        /* 第二关和第四关限时器 */
+        /* 限时器 - 修改为10秒 */
         .timer-container {
             background: #ff6b6b;
             color: white;
@@ -949,86 +945,33 @@
             animation: fadeIn 0.5s forwards;
         }
 
-        /* 横向屏幕响应式调整 */
-        @media (max-width: 1400px) {
-            .game-container {
-                max-width: 1200px;
-            }
-            
-            .header h1 {
-                font-size: 2.2rem;
-            }
-            
-            .main-content {
-                grid-template-columns: 300px 1fr;
-                gap: 20px;
-            }
-            
-            .game-map {
-                flex-direction: row;
-            }
-        }
-
-        @media (max-width: 1100px) {
-            .game-container {
-                max-width: 1000px;
-            }
-            
+        /* 响应式设计 */
+        @media (max-width: 1200px) {
             .main-content {
                 grid-template-columns: 280px 1fr;
-            }
-            
-            .game-map {
-                flex-direction: column;
-                gap: 40px;
-            }
-            
-            .map-path {
-                display: none;
-            }
-            
-            .header h1 {
-                font-size: 2rem;
-            }
-            
-            .game-stats {
-                flex-wrap: wrap;
-                justify-content: center;
             }
         }
 
         @media (max-width: 900px) {
-            body {
-                padding: 15px;
-            }
-            
             .main-content {
                 grid-template-columns: 1fr;
                 height: auto;
                 min-height: auto;
             }
             
-            .side-panel {
+            .side-panel, .game-area {
                 height: auto;
             }
             
-            .game-area {
-                height: auto;
-                min-height: 600px;
+            .grid-container {
+                grid-template-columns: 1fr;
+                max-width: 400px;
             }
         }
 
         @media (max-width: 768px) {
-            .header {
-                padding: 20px 15px;
-            }
-            
             .header h1 {
                 font-size: 1.8rem;
-            }
-            
-            .header .subtitle {
-                font-size: 1rem;
             }
             
             .game-area {
@@ -1070,6 +1013,11 @@
                 padding: 12px 25px;
                 min-width: 110px;
             }
+            
+            .game-stats {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
         }
 
         @media (max-width: 480px) {
@@ -1098,79 +1046,14 @@
                 font-size: 1.2rem;
             }
             
-            .start-button {
-                min-width: 250px;
-                padding: 16px 30px;
-                font-size: 1.2rem;
-            }
-        }
-
-        /* 横向屏幕专用样式 */
-        @media (orientation: landscape) and (max-height: 900px) {
-            .main-content {
-                height: calc(100vh - 150px);
+            .grid-icon {
+                width: 60px;
+                height: 60px;
+                font-size: 1.8rem;
             }
             
-            .header {
-                padding: 20px;
-                margin-bottom: 15px;
-            }
-            
-            .header h1 {
-                font-size: 2rem;
-            }
-            
-            .side-panel {
-                padding: 20px 15px;
-            }
-            
-            .game-area {
-                padding: 25px;
-            }
-            
-            .question-text {
-                padding: 20px;
+            .grid-title {
                 font-size: 1.3rem;
-            }
-            
-            .option {
-                padding: 15px;
-                min-height: 70px;
-            }
-        }
-
-        /* 华为Mate Pad横向屏幕优化 */
-        @media (min-width: 1200px) and (min-height: 700px) {
-            .game-container {
-                max-width: 1400px;
-            }
-            
-            .header h1 {
-                font-size: 2.5rem;
-            }
-            
-            .main-content {
-                height: calc(100vh - 200px);
-            }
-            
-            .question-text {
-                font-size: 1.5rem;
-                line-height: 1.7;
-            }
-            
-            .option {
-                font-size: 1.2rem;
-                padding: 25px;
-            }
-            
-            .true-false-option {
-                width: 220px;
-                height: 140px;
-                font-size: 2.2rem;
-            }
-            
-            .true-false-label {
-                font-size: 1.4rem;
             }
         }
 
@@ -1273,8 +1156,8 @@
                     <div class="level-item level-2" data-level="2">
                         <div class="level-icon">2</div>
                         <div class="level-info">
-                            <div class="level-name">限时挑战赛</div>
-                            <div class="level-desc">提升速度与准确率</div>
+                            <div class="level-name">极限挑战</div>
+                            <div class="level-desc">每题限时10秒</div>
                         </div>
                         <div class="level-status" id="level2-status">未解锁</div>
                     </div>
@@ -1304,59 +1187,54 @@
                     <div class="welcome-title">欢迎来到阅读闯关大冒险！</div>
                     <div class="welcome-subtitle">
                         亲爱的小书虫，准备好挑战你的阅读知识了吗？<br>
-                        这里有三重难度的阅读挑战等待着你，每闯过一关都会变得更强大！<br>
-                        <strong>新规则：</strong>单击选中，双击直接提交答案！
+                        这里有四重难度的阅读挑战等待着你，每闯过一关都会变得更强大！
                     </div>
 
-                    <div class="game-map">
-                        <div class="map-path"></div>
-                        
-                        <div class="map-level map-level-1">
-                            <div class="map-level-icon" id="map-level-1">
+                    <!-- 四宫格布局 -->
+                    <div class="grid-container" id="grid-container">
+                        <!-- 第一关 -->
+                        <div class="grid-item level-1 active" id="grid-level-1" data-level="1">
+                            <div class="grid-icon">
                                 <i class="fas fa-seedling"></i>
                             </div>
-                            <div class="map-level-name">新手训练营</div>
-                            <div class="map-level-desc">难度★<br>3轮挑战，每轮15题</div>
+                            <div class="grid-title">新手训练营</div>
+                            <div class="grid-subtitle">难度★</div>
+                            <div class="grid-desc">3轮挑战，每轮15题</div>
+                            <div class="grid-status status-available">点击开始</div>
                         </div>
                         
-                        <div class="map-level map-level-2">
-                            <div class="map-level-icon locked" id="map-level-2">
-                                <i class="fas fa-clock"></i>
-                            </div>
-                            <div class="map-level-name">限时挑战赛</div>
-                            <div class="map-level-desc">难度★★★<br>45秒限时，挑战速度</div>
-                        </div>
-                        
-                        <div class="map-level map-level-3">
-                            <div class="map-level-icon locked" id="map-level-3">
-                                <i class="fas fa-crown"></i>
-                            </div>
-                            <div class="map-level-name">巅峰对决</div>
-                            <div class="map-level-desc">难度★★★★★<br>生存挑战，策略对决</div>
-                        </div>
-                        
-                        <div class="map-level map-level-4">
-                            <div class="map-level-icon locked" id="map-level-4">
+                        <!-- 第二关 -->
+                        <div class="grid-item level-2 locked" id="grid-level-2" data-level="2">
+                            <div class="grid-icon">
                                 <i class="fas fa-bolt"></i>
                             </div>
-                            <div class="map-level-name">随机大挑战</div>
-                            <div class="map-level-desc">难度★★★★<br>60秒挑战40道题</div>
+                            <div class="grid-title">极限挑战</div>
+                            <div class="grid-subtitle">难度★★★</div>
+                            <div class="grid-desc">每题限时10秒</div>
+                            <div class="grid-status status-locked">未解锁</div>
                         </div>
-                    </div>
-
-                    <div style="margin-top: 30px; display: flex; flex-direction: column; gap: 20px; align-items: center;">
-                        <button class="start-button" id="start-level-1">
-                            <i class="fas fa-play"></i> 开始新手训练营
-                        </button>
-                        <button class="start-button locked" id="start-level-2" disabled>
-                            <i class="fas fa-lock"></i> 限时挑战赛 (未解锁)
-                        </button>
-                        <button class="start-button locked" id="start-level-3" disabled>
-                            <i class="fas fa-lock"></i> 巅峰对决 (未解锁)
-                        </button>
-                        <button class="start-button locked" id="start-level-4" disabled>
-                            <i class="fas fa-lock"></i> 随机大挑战 (未解锁)
-                        </button>
+                        
+                        <!-- 第三关 -->
+                        <div class="grid-item level-3 locked" id="grid-level-3" data-level="3">
+                            <div class="grid-icon">
+                                <i class="fas fa-crown"></i>
+                            </div>
+                            <div class="grid-title">巅峰对决</div>
+                            <div class="grid-subtitle">难度★★★★★</div>
+                            <div class="grid-desc">生存挑战，策略对决</div>
+                            <div class="grid-status status-locked">未解锁</div>
+                        </div>
+                        
+                        <!-- 第四关 -->
+                        <div class="grid-item level-4 locked" id="grid-level-4" data-level="4">
+                            <div class="grid-icon">
+                                <i class="fas fa-random"></i>
+                            </div>
+                            <div class="grid-title">随机大挑战</div>
+                            <div class="grid-subtitle">难度★★★★</div>
+                            <div class="grid-desc">60秒挑战40道题</div>
+                            <div class="grid-status status-locked">未解锁</div>
+                        </div>
                     </div>
 
                     <div style="margin-top: 40px; display: flex; gap: 20px; justify-content: center; flex-wrap: wrap;">
@@ -1469,15 +1347,10 @@
                         </div>
                     </div>
 
-                    <!-- 操作提示 -->
-                    <div class="operation-hint" id="operation-hint">
-                        <i class="fas fa-mouse-pointer"></i> 单击选中，双击直接提交答案
-                    </div>
-
-                    <!-- 第二关和第四关限时器 -->
+                    <!-- 第二关限时器 -->
                     <div class="timer-container" id="timer-container" style="display: none;">
                         <i class="fas fa-clock"></i>
-                        <span id="timer">45</span>秒
+                        <span id="timer">10</span>秒
                     </div>
 
                     <!-- 第三关生存信息 -->
@@ -1523,9 +1396,6 @@
                             </button>
                             <button class="btn btn-success" id="submit-btn" disabled>
                                 <i class="fas fa-paper-plane"></i> 提交答案
-                            </button>
-                            <button class="btn btn-primary" id="next-btn">
-                                <i class="fas fa-arrow-right"></i> 下一题
                             </button>
                         </div>
                     </div>
@@ -1922,47 +1792,6 @@
               options: ["狮子", "刺猬", "老虎"], 
               correctAnswer: 2, explanation: "被称为\"大虫\"的是老虎。" },
 
-            // 多选题 (8题)
-            { id: 73, level: 2, type: "multiple", difficulty: "medium", subject: "歪脑袋木头桩",
-              question: "木头桩外貌和性格是什么？（多选）", 
-              options: ["满身都是皱纹", "很骄傲很骄傲", "又脏又丑", "很老很老", "尖尖的脑袋"], 
-              correctAnswer: [0, 2, 4], explanation: "木头桩外貌是满身都是皱纹、又脏又丑、尖尖的脑袋，性格是很骄傲。" },
-            
-            { id: 74, level: 2, type: "multiple", difficulty: "medium", subject: "歪脑袋木头桩",
-              question: "让木头桩骄傲的原因是什么？（多选）", 
-              options: ["满身皱纹，又脏又丑", "有尖尖的脑袋，脑袋老是歪着", "比谁都高，觉得比谁都高明", "年纪大"], 
-              correctAnswer: [0, 1, 2], explanation: "木头桩因为满身皱纹又脏又丑、有尖尖的脑袋老是歪着、比谁都高觉得比谁都高明而骄傲。" },
-            
-            { id: 75, level: 2, type: "multiple", difficulty: "medium", subject: "歪脑袋木头桩",
-              question: "小男孩刻了一个什么样的鬼脸？（多选）", 
-              options: ["一双瞪人的大眼睛", "一张露着牙齿的大嘴", "一个大鼻子", "满脸笑容"], 
-              correctAnswer: [0, 1, 2], explanation: "小男孩刻了一双瞪人的大眼睛、一张露着牙齿的大嘴、一个大鼻子。" },
-            
-            { id: 76, level: 2, type: "multiple", difficulty: "medium", subject: "歪脑袋木头桩",
-              question: "木头桩身上后来发生了哪些事情？（多选）", 
-              options: ["小姑娘缠在他身上跳了两次皮筋", "工人把木头桩连根拔起了", "工人把木头桩做成了一张椅子", "木头桩想起自己也做过小树开过花"], 
-              correctAnswer: [0, 2, 3], explanation: "小姑娘跳皮筋、工人做成椅子、想起自己做过小树开过花。" },
-            
-            { id: 77, level: 2, type: "multiple", difficulty: "medium", subject: "歪脑袋木头桩",
-              question: "这是一个什么样的木头桩？（多选）", 
-              options: ["又脏又丑", "年纪很大", "骄傲自大", "害怕寂寞", "唱歌跑调"], 
-              correctAnswer: [0, 1, 2, 3], explanation: "木头桩又脏又丑、年纪很大、骄傲自大、害怕寂寞。" },
-            
-            { id: 78, level: 2, type: "multiple", difficulty: "medium", subject: "歪脑袋木头桩",
-              question: "丁丁和小蚂蚁先后遇到了哪些人？（多选）", 
-              options: ["老糊涂虫，它的胆子也很小", "\"知道得很少\"", "\"什么都知道一点儿却不算多\"", "\"什么都知道\"老师"], 
-              correctAnswer: [0, 1, 2, 3], explanation: "丁丁和小蚂蚁遇到了老糊涂虫、\"知道得很少\"、\"什么都知道一点儿却不算多\"、\"什么都知道\"老师。" },
-            
-            { id: 79, level: 2, type: "multiple", difficulty: "medium", subject: "歪脑袋木头桩",
-              question: "你从哪些事情中可以看出丁丁的胆子变大了，变勇敢了？（多选）", 
-              options: ["帮蚂蚁背粮食", "请老杨树帮忙", "过河时勇敢地救了红眉毛", "礼貌地向老山羊请教"], 
-              correctAnswer: [0, 1, 2, 3], explanation: "丁丁帮蚂蚁背粮食、请老杨树帮忙、救红眉毛、向老山羊请教都体现了她的勇敢。" },
-            
-            { id: 80, level: 2, type: "multiple", difficulty: "medium", subject: "歪脑袋木头桩",
-              question: "什么是勇气呢？（多选）", 
-              options: ["和同伴一起解决困难", "有问题自己想办法", "有问题就当做没看到", "自己敢一个人睡觉"], 
-              correctAnswer: [0, 1, 3], explanation: "勇气是和同伴一起解决困难、有问题自己想办法、自己敢一个人睡觉。" },
-
             // 判断题 (20题)
             { id: 81, level: 1, type: "true-false", difficulty: "easy", subject: "歪脑袋木头桩",
               question: "木头桩尖尖的脑袋总是歪着的。", 
@@ -2068,11 +1897,10 @@
         // 游戏状态
         const gameState = {
             currentLevel: 1,
-            currentRound: 1, // 当前轮次
-            totalRounds: 3,  // 第一关总轮数
+            currentRound: 1,
+            totalRounds: 3,
             currentQuestionIndex: 0,
             score: 0,
-            totalScore: 0,
             correctCount: 0,
             answeredCount: 0,
             goldCoins: 0,
@@ -2080,9 +1908,8 @@
             maxStreak: 0,
             currentStreak: 0,
             
-            // 轮次进度跟踪
             roundProgress: {
-                1: { // 第一轮进度
+                1: {
                     totalQuestions: 15,
                     answeredQuestions: 0,
                     correctQuestions: 0,
@@ -2095,7 +1922,7 @@
                     endTime: null,
                     timeUsed: 0
                 },
-                2: { // 第二轮进度
+                2: {
                     totalQuestions: 15,
                     answeredQuestions: 0,
                     correctQuestions: 0,
@@ -2108,7 +1935,7 @@
                     endTime: null,
                     timeUsed: 0
                 },
-                3: { // 第三轮进度
+                3: {
                     totalQuestions: 15,
                     answeredQuestions: 0,
                     correctQuestions: 0,
@@ -2123,20 +1950,9 @@
                 }
             },
             
-            // 学习进度跟踪
             levelProgress: {
-                1: { // 第一关进度
-                    totalQuestions: 45, // 3轮 × 15题
-                    answeredQuestions: 0,
-                    correctQuestions: 0,
-                    wrongQuestions: [],
-                    completionRate: 0,
-                    accuracy: 0,
-                    // 错题重做记录
-                    wrongQuestionRetry: {}
-                },
-                2: { // 第二关进度
-                    totalQuestions: questionBank.filter(q => q.level === 2).length,
+                1: {
+                    totalQuestions: 45,
                     answeredQuestions: 0,
                     correctQuestions: 0,
                     wrongQuestions: [],
@@ -2144,8 +1960,8 @@
                     accuracy: 0,
                     wrongQuestionRetry: {}
                 },
-                3: { // 第三关进度
-                    totalQuestions: questionBank.filter(q => q.level === 3).length,
+                2: {
+                    totalQuestions: 15,
                     answeredQuestions: 0,
                     correctQuestions: 0,
                     wrongQuestions: [],
@@ -2153,7 +1969,16 @@
                     accuracy: 0,
                     wrongQuestionRetry: {}
                 },
-                4: { // 第四关进度
+                3: {
+                    totalQuestions: 15,
+                    answeredQuestions: 0,
+                    correctQuestions: 0,
+                    wrongQuestions: [],
+                    completionRate: 0,
+                    accuracy: 0,
+                    wrongQuestionRetry: {}
+                },
+                4: {
                     totalQuestions: 40,
                     answeredQuestions: 0,
                     correctQuestions: 0,
@@ -2170,7 +1995,7 @@
             userAnswers: [],
             questionStatus: [],
             
-            timeLeft: 45,
+            timeLeft: 10, // 第二关改为每题限时10秒
             timerInterval: null,
             totalTimeUsed: 0,
             
@@ -2179,13 +2004,7 @@
             survivalCorrectInRow: 0,
             
             wrongQuestions: [],
-            
-            // 记录已使用的题目ID，确保轮次间不重复
-            usedQuestionIds: new Set(),
-            
-            // 新增：自动提交和跳转状态
-            autoSubmitted: false,
-            isAutoTransitioning: false
+            usedQuestionIds: new Set()
         };
 
         // ==================== DOM元素引用 ====================
@@ -2195,10 +2014,6 @@
         const resultScreen = document.getElementById('result-screen');
         const wrongQuestionsScreen = document.getElementById('wrong-questions-screen');
         
-        const startLevel1Btn = document.getElementById('start-level-1');
-        const startLevel2Btn = document.getElementById('start-level-2');
-        const startLevel3Btn = document.getElementById('start-level-3');
-        const startLevel4Btn = document.getElementById('start-level-4');
         const viewWrongQuestionsBtn = document.getElementById('view-wrong-questions-btn');
         const backToHomeFromRoundsBtn = document.getElementById('back-to-home-from-rounds');
         
@@ -2209,18 +2024,12 @@
         const completionRateElement = document.getElementById('completionRate');
         const totalTimeElement = document.getElementById('totalTime');
         
-        const mapLevel1 = document.getElementById('map-level-1');
-        const mapLevel2 = document.getElementById('map-level-2');
-        const mapLevel3 = document.getElementById('map-level-3');
-        const mapLevel4 = document.getElementById('map-level-4');
-        
         const stageProgressElement = document.getElementById('stage-progress');
         const currentScoreElement = document.getElementById('current-score');
         const accuracyElement = document.getElementById('accuracy');
         const questionNumberElement = document.getElementById('question-number');
         const questionTypeElement = document.getElementById('question-type');
         const questionTextElement = document.getElementById('question-text');
-        const operationHint = document.getElementById('operation-hint');
         const optionsContainer = document.getElementById('options-container');
         const trueFalseContainer = document.getElementById('true-false-container');
         const trueOption = document.getElementById('true-option');
@@ -2238,7 +2047,6 @@
         
         const prevBtn = document.getElementById('prev-btn');
         const submitBtn = document.getElementById('submit-btn');
-        const nextBtn = document.getElementById('next-btn');
         
         const resultScreenElement = document.getElementById('result-screen');
         
@@ -2253,6 +2061,22 @@
             updateLevelStatus();
             loadHomeScreen();
             
+            // 绑定四宫格点击事件
+            document.querySelectorAll('.grid-item').forEach(item => {
+                item.addEventListener('click', function() {
+                    const level = parseInt(this.getAttribute('data-level'));
+                    const isLocked = this.classList.contains('locked');
+                    
+                    if (!isLocked) {
+                        if (level === 1) {
+                            startLevel1();
+                        } else {
+                            startLevel(level);
+                        }
+                    }
+                });
+            });
+            
             // 绑定轮次选择事件
             document.querySelectorAll('.round-card').forEach(card => {
                 card.addEventListener('click', function() {
@@ -2261,6 +2085,46 @@
                         return;
                     }
                     startRound(round);
+                });
+            });
+            
+            // 绑定其他按钮事件
+            viewWrongQuestionsBtn.addEventListener('click', loadWrongQuestions);
+            backToHomeFromRoundsBtn.addEventListener('click', loadHomeScreen);
+            backToHomeFromWrongBtn.addEventListener('click', loadHomeScreen);
+            
+            // 提交按钮事件
+            submitBtn.addEventListener('click', handleSubmit);
+            
+            // 上一题按钮事件
+            prevBtn.addEventListener('click', () => {
+                if (gameState.currentQuestionIndex > 0) {
+                    gameState.currentQuestionIndex--;
+                    loadQuestion(gameState.currentQuestionIndex);
+                    
+                    if (gameState.currentLevel === 2 && 
+                        gameState.questionStatus[gameState.currentQuestionIndex] === 'unanswered') {
+                        startTimer();
+                    }
+                }
+            });
+            
+            // 绑定左侧关卡点击事件
+            document.querySelectorAll('.level-item').forEach(item => {
+                item.addEventListener('click', function() {
+                    const level = parseInt(this.getAttribute('data-level'));
+                    if (gameState.levelUnlocked[level - 1]) {
+                        document.querySelectorAll('.level-item').forEach(i => {
+                            i.classList.remove('active');
+                        });
+                        this.classList.add('active');
+                        
+                        if (homeScreen.style.display !== 'block') {
+                            loadHomeScreen();
+                        }
+                    } else {
+                        alert(`第${level}关尚未解锁！\n\n解锁条件：\n1. 完成前一关所有题目且正确率>70%\n\n请继续努力！`);
+                    }
                 });
             });
         }
@@ -2272,7 +2136,6 @@
             wisdomStarsElement.textContent = gameState.wisdomStars;
             maxStreakElement.textContent = gameState.maxStreak;
             
-            // 计算总用时
             let totalTime = 0;
             for (let round = 1; round <= 3; round++) {
                 if (gameState.roundProgress[round].timeUsed) {
@@ -2281,7 +2144,6 @@
             }
             totalTimeElement.textContent = `${totalTime}秒`;
             
-            // 更新完成度
             const levelProgress = gameState.levelProgress[gameState.currentLevel];
             if (levelProgress) {
                 completionRateElement.textContent = `${levelProgress.completionRate}%`;
@@ -2290,68 +2152,59 @@
 
         // 更新关卡状态
         function updateLevelStatus() {
-            // 检查每个关卡是否满足解锁条件
             for (let level = 1; level <= 4; level++) {
                 const progress = gameState.levelProgress[level];
                 if (progress) {
-                    // 检查解锁条件：完成度100%且正确率>70%
                     let canUnlock = false;
                     
                     if (level === 1) {
-                        // 第一关：完成所有3轮且正确率>70%
                         const round1Passed = gameState.roundProgress[1].passed;
                         const round2Passed = gameState.roundProgress[2].passed;
                         const round3Passed = gameState.roundProgress[3].passed;
                         canUnlock = round1Passed && round2Passed && round3Passed;
                     } else if (level === 2) {
-                        // 第二关：需要完成第一关
                         canUnlock = gameState.levelUnlocked[level - 2];
                     } else if (level === 3) {
-                        // 第三关：需要完成第二关
                         canUnlock = gameState.levelUnlocked[level - 2];
                     } else if (level === 4) {
-                        // 第四关：需要完成前三关
                         canUnlock = gameState.levelUnlocked[0] && gameState.levelUnlocked[1] && gameState.levelUnlocked[2];
                     }
                     
                     if (canUnlock && level < 4) {
-                        gameState.levelUnlocked[level] = true; // 解锁下一关
+                        gameState.levelUnlocked[level] = true;
                     }
                 }
             }
             
-            // 更新显示
+            // 更新左侧状态
             document.getElementById('level1-status').textContent = "进行中";
             document.getElementById('level2-status').textContent = gameState.levelUnlocked[1] ? "已解锁" : "未解锁";
             document.getElementById('level3-status').textContent = gameState.levelUnlocked[2] ? "已解锁" : "未解锁";
             document.getElementById('level4-status').textContent = gameState.levelUnlocked[3] ? "已解锁" : "未解锁";
             
-            mapLevel1.classList.remove('locked');
-            if (gameState.levelUnlocked[1]) {
-                mapLevel2.classList.remove('locked');
-                startLevel2Btn.classList.remove('locked');
-                startLevel2Btn.disabled = false;
-                startLevel2Btn.innerHTML = '<i class="fas fa-play"></i> 开始限时挑战赛';
-            }
-            if (gameState.levelUnlocked[2]) {
-                mapLevel3.classList.remove('locked');
-                startLevel3Btn.classList.remove('locked');
-                startLevel3Btn.disabled = false;
-                startLevel3Btn.innerHTML = '<i class="fas fa-play"></i> 开始巅峰对决';
-            }
-            if (gameState.levelUnlocked[3]) {
-                mapLevel4.classList.remove('locked');
-                startLevel4Btn.classList.remove('locked');
-                startLevel4Btn.disabled = false;
-                startLevel4Btn.innerHTML = '<i class="fas fa-play"></i> 开始随机大挑战';
-            }
+            // 更新四宫格状态
+            const gridItems = document.querySelectorAll('.grid-item');
+            gridItems.forEach(item => {
+                const level = parseInt(item.getAttribute('data-level'));
+                const statusElement = item.querySelector('.grid-status');
+                
+                if (gameState.levelUnlocked[level - 1]) {
+                    item.classList.remove('locked');
+                    statusElement.textContent = '点击开始';
+                    statusElement.className = 'grid-status status-available';
+                } else {
+                    item.classList.add('locked');
+                    statusElement.textContent = '未解锁';
+                    statusElement.className = 'grid-status status-locked';
+                }
+            });
         }
 
         // 获取关卡名称
         function getLevelName(level) {
             switch(level) {
                 case 1: return "新手训练营";
-                case 2: return "限时挑战赛";
+                case 2: return "极限挑战";
                 case 3: return "巅峰对决";
                 case 4: return "随机大挑战";
                 default: return "未知";
@@ -2375,7 +2228,6 @@
             resultScreen.style.display = 'none';
             wrongQuestionsScreen.style.display = 'none';
             
-            // 更新轮次状态
             for (let round = 1; round <= 3; round++) {
                 const roundCard = document.getElementById(`round-card-${round}`);
                 const roundStatus = document.getElementById(`round-${round}-status`);
@@ -2404,7 +2256,7 @@
         // 开始第一关
         function startLevel1() {
             gameState.currentLevel = 1;
-            gameState.usedQuestionIds.clear(); // 重置已使用题目
+            gameState.usedQuestionIds.clear();
             loadRoundSelection();
         }
 
@@ -2419,10 +2271,7 @@
             gameState.questionStatus = [];
             gameState.currentStreak = 0;
             
-            // 记录开始时间
             gameState.roundProgress[round].startTime = Date.now();
-            
-            // 为当前轮次选择15道题目
             gameState.currentQuestions = getRoundQuestions(15, round);
             
             for (let i = 0; i < gameState.currentQuestions.length; i++) {
@@ -2438,15 +2287,11 @@
             loadQuestion(0);
         }
 
-        // 获取轮次题目（确保轮次间不重复）
+        // 获取轮次题目
         function getRoundQuestions(count, round) {
-            // 筛选第一关的题目
             let availableQuestions = questionBank.filter(q => q.level === 1 && q.difficulty === "easy");
-            
-            // 排除已使用的题目
             availableQuestions = availableQuestions.filter(q => !gameState.usedQuestionIds.has(q.id));
             
-            // 如果可用题目不足，从其他难度补充
             if (availableQuestions.length < count) {
                 const additionalNeeded = count - availableQuestions.length;
                 let additionalQuestions = questionBank.filter(q => 
@@ -2454,22 +2299,18 @@
                     (q.type === "true-false" && q.level === 1)
                 );
                 
-                // 排除已使用的
                 additionalQuestions = additionalQuestions.filter(q => !gameState.usedQuestionIds.has(q.id));
                 
-                // 如果还不够，就从已使用的题目中随机选择一些重复使用
                 if (additionalQuestions.length < additionalNeeded) {
                     const usedEasyQuestions = questionBank.filter(q => 
                         q.level === 1 && q.difficulty === "easy" && gameState.usedQuestionIds.has(q.id)
                     );
                     
-                    // 随机选择一些已用过的题目
                     for (let i = 0; i < additionalNeeded - additionalQuestions.length && i < usedEasyQuestions.length; i++) {
                         const randomIndex = Math.floor(Math.random() * usedEasyQuestions.length);
                         availableQuestions.push(usedEasyQuestions[randomIndex]);
                     }
                 } else {
-                    // 从补充题目中随机选择
                     for (let i = 0; i < additionalNeeded && i < additionalQuestions.length; i++) {
                         const randomIndex = Math.floor(Math.random() * additionalQuestions.length);
                         availableQuestions.push(additionalQuestions[randomIndex]);
@@ -2478,7 +2319,6 @@
                 }
             }
             
-            // 随机选择指定数量的题目
             let selectedQuestions = [];
             let availableIndices = [...Array(availableQuestions.length).keys()];
             
@@ -2488,7 +2328,7 @@
                 const question = availableQuestions[questionIndex];
                 
                 selectedQuestions.push(question);
-                gameState.usedQuestionIds.add(question.id); // 标记为已使用
+                gameState.usedQuestionIds.add(question.id);
                 availableIndices.splice(randomIndex, 1);
             }
             
@@ -2497,22 +2337,18 @@
 
         // 设置轮次UI
         function setupRoundUI(round) {
-            const roundNames = ["第一轮：基础入门", "第二轮：巩固提升", "第三轮：综合挑战"];
-            const levelNames = ["新手训练营", "新手训练营", "新手训练营"];
-            
-            document.getElementById('current-level-name').textContent = levelNames[round-1];
+            document.getElementById('current-level-name').textContent = "新手训练营";
             roundIndicator.textContent = `第${round}轮`;
             
             stageProgressElement.textContent = `1/${gameState.currentQuestions.length}`;
             currentScoreElement.textContent = gameState.score;
             accuracyElement.textContent = '0%';
             
-            operationHint.innerHTML = '<i class="fas fa-mouse-pointer"></i> 单击选中，双击直接提交答案';
             timerContainer.style.display = 'none';
             survivalInfo.style.display = 'none';
         }
 
-        // 开始关卡（第二、三、四关）
+        // 开始关卡
         function startLevel(level) {
             gameState.currentLevel = level;
             gameState.currentRound = 1;
@@ -2524,33 +2360,30 @@
             gameState.questionStatus = [];
             gameState.currentStreak = 0;
             
-            // 根据关卡选择题目
             let questionCount = 0;
             switch(level) {
                 case 2:
-                    questionCount = 10; // 第二关10题
-                    gameState.timeLeft = 45;
+                    questionCount = 15;
+                    gameState.timeLeft = 10; // 第二关改为每题限时10秒
                     gameState.totalTimeUsed = 0;
                     break;
                 case 3:
-                    questionCount = 15; // 第三关15题
+                    questionCount = 15;
                     gameState.survivalRound = 1;
                     gameState.survivalShields = 0;
                     gameState.survivalCorrectInRow = 0;
                     break;
                 case 4:
-                    questionCount = 40; // 第四关40题
+                    questionCount = 40;
                     gameState.timeLeft = 60;
                     gameState.totalTimeUsed = 0;
                     break;
             }
             
-            // 记录开始时间
             if (level === 4) {
                 gameState.levelProgress[level].startTime = Date.now();
             }
             
-            // 从对应难度的题库中随机选择题目
             gameState.currentQuestions = getRandomQuestions(questionCount, level);
             
             for (let i = 0; i < gameState.currentQuestions.length; i++) {
@@ -2580,10 +2413,7 @@
         // 获取随机题目
         function getRandomQuestions(count, level) {
             if (level === 4) {
-                // 第四关：从所有题库中随机抽取40道题
                 let availableQuestions = [...questionBank];
-                
-                // 随机选择题目
                 let selectedQuestions = [];
                 let availableIndices = [...Array(availableQuestions.length).keys()];
                 
@@ -2596,10 +2426,8 @@
                 
                 return selectedQuestions;
             } else {
-                // 从对应难度的题库中筛选题目
                 let filteredQuestions = questionBank.filter(q => q.level === level);
                 
-                // 如果题目数量不足，补充一些其他难度的题目
                 if (filteredQuestions.length < count) {
                     const additionalNeeded = count - filteredQuestions.length;
                     let additionalQuestions = [];
@@ -2618,7 +2446,6 @@
                     }
                 }
                 
-                // 随机选择题目
                 let selectedQuestions = [];
                 let availableIndices = [...Array(filteredQuestions.length).keys()];
                 
@@ -2636,29 +2463,25 @@
         // 设置关卡UI
         function setupLevelUI(level) {
             const gameTitle = document.querySelector('.game-title');
-            const levelTag = document.querySelector('.level-tag');
             const currentLevelName = document.getElementById('current-level-name');
             
             switch(level) {
                 case 2:
-                    currentLevelName.textContent = '限时挑战赛';
-                    gameTitle.innerHTML = '限时挑战赛 <span class="level-tag">难度★★★</span>';
+                    currentLevelName.textContent = '极限挑战';
+                    gameTitle.innerHTML = '极限挑战 <span class="level-tag">每题限时10秒</span>';
                     timerContainer.style.display = 'flex';
-                    timerElement.textContent = '45';
-                    operationHint.innerHTML = '<i class="fas fa-mouse-pointer"></i> 单击选中，双击直接提交答案 • <i class="fas fa-clock"></i> 每题限时45秒';
+                    timerElement.textContent = '10';
                     break;
                 case 3:
                     currentLevelName.textContent = '巅峰对决';
-                    gameTitle.innerHTML = '巅峰对决 <span class="level-tag">难度★★★★★</span>';
+                    gameTitle.innerHTML = '巅峰对决 <span class="level-tag">生存模式</span>';
                     timerContainer.style.display = 'none';
-                    operationHint.innerHTML = '<i class="fas fa-mouse-pointer"></i> 单击选中，双击直接提交答案 • <i class="fas fa-shield-alt"></i> 生存模式';
                     break;
                 case 4:
                     currentLevelName.textContent = '随机大挑战';
-                    gameTitle.innerHTML = '随机大挑战 <span class="level-tag">难度★★★★</span>';
+                    gameTitle.innerHTML = '随机大挑战 <span class="level-tag">60秒挑战40题</span>';
                     timerContainer.style.display = 'flex';
                     timerElement.textContent = '60';
-                    operationHint.innerHTML = '<i class="fas fa-mouse-pointer"></i> 单击选中，双击直接提交答案 • <i class="fas fa-clock"></i> 60秒挑战40题';
                     break;
             }
             
@@ -2669,9 +2492,6 @@
 
         // 加载题目
         function loadQuestion(index) {
-            // 重置自动跳转标记
-            gameState.isAutoTransitioning = false;
-            
             const question = gameState.currentQuestions[index];
             
             questionNumberElement.textContent = `第 ${index + 1} 题`;
@@ -2704,23 +2524,19 @@
                         <div class="option-text">${option}</div>
                     `;
                     
-                    // 为单选题添加单击选中功能
-                    optionElement.addEventListener('click', function(e) {
+                    optionElement.addEventListener('click', function() {
                         if (gameState.questionStatus[gameState.currentQuestionIndex] !== 'unanswered') {
                             return;
                         }
                         
-                        // 清除之前的选择状态
                         if (question.type === "single") {
                             document.querySelectorAll('.option').forEach(opt => {
                                 opt.classList.remove('selected');
                             });
                         }
                         
-                        // 设置新的选择状态
                         this.classList.toggle('selected');
                         
-                        // 更新用户答案
                         if (question.type === "single") {
                             gameState.userAnswers[gameState.currentQuestionIndex] = this.classList.contains('selected') ? i : null;
                         } else {
@@ -2738,70 +2554,17 @@
                             gameState.userAnswers[gameState.currentQuestionIndex] = currentAnswers;
                         }
                         
-                        // 更新提交按钮状态
                         if (question.type === "multiple") {
                             const currentAnswers = gameState.userAnswers[gameState.currentQuestionIndex] || [];
                             submitBtn.disabled = currentAnswers.length === 0;
                         } else {
                             submitBtn.disabled = gameState.userAnswers[gameState.currentQuestionIndex] === null;
                         }
-                        
-                        playSound('click');
                     });
-                    
-                    // 为单选题添加双击提交功能
-                    if (question.type === "single") {
-                        optionElement.addEventListener('dblclick', function(e) {
-                            if (gameState.questionStatus[gameState.currentQuestionIndex] !== 'unanswered') {
-                                return;
-                            }
-                            
-                            // 清除之前的选择状态
-                            document.querySelectorAll('.option').forEach(opt => {
-                                opt.classList.remove('selected');
-                            });
-                            
-                            // 设置新的选择状态
-                            this.classList.add('selected');
-                            gameState.userAnswers[gameState.currentQuestionIndex] = i;
-                            
-                            // 标记为自动提交
-                            gameState.autoSubmitted = true;
-                            
-                            // 立即提交答案
-                            submitAnswer();
-                            
-                            // 提交后自动跳转到下一题
-                            if (gameState.currentQuestionIndex < gameState.currentQuestions.length - 1) {
-                                // 设置延迟，让用户看到答案反馈
-                                setTimeout(() => {
-                                    // 自动跳转到下一题
-                                    gameState.currentQuestionIndex++;
-                                    loadQuestion(gameState.currentQuestionIndex);
-                                    
-                                    // 重置自动提交标记
-                                    gameState.autoSubmitted = false;
-                                    
-                                    // 如果是第二关或第四关且题目未回答，重新启动计时器
-                                    if ((gameState.currentLevel === 2 || gameState.currentLevel === 4) && 
-                                        gameState.questionStatus[gameState.currentQuestionIndex] === 'unanswered') {
-                                        startTimer();
-                                    }
-                                }, 100); // 0.1秒后跳转
-                            } else {
-                                // 如果是最后一题，完成关卡
-                                setTimeout(() => {
-                                    finishLevel();
-                                    gameState.autoSubmitted = false;
-                                }, 100);
-                            }
-                        });
-                    }
                     
                     optionsContainer.appendChild(optionElement);
                 });
                 
-                // 如果已经回答过，恢复选择状态
                 if (gameState.userAnswers[index] !== null) {
                     const answer = gameState.userAnswers[index];
                     if (question.type === "single") {
@@ -2823,36 +2586,26 @@
                 optionsContainer.style.display = "none";
                 trueFalseContainer.style.display = "flex";
                 
-                // 修复判断题选项点击问题 - 使用一次性事件绑定
                 trueOption.onclick = null;
                 falseOption.onclick = null;
                 
-                // 清除之前的选择状态
                 trueOption.classList.remove('selected', 'correct', 'incorrect');
                 falseOption.classList.remove('selected', 'correct', 'incorrect');
                 
-                // 启用指针事件
                 trueOption.style.pointerEvents = 'auto';
                 falseOption.style.pointerEvents = 'auto';
                 
-                // 修复：为判断题选项添加点击事件
                 trueOption.onclick = () => {
                     if (gameState.questionStatus[gameState.currentQuestionIndex] !== 'unanswered') {
                         return;
                     }
                     
-                    // 清除之前的选择状态
                     trueOption.classList.remove('selected');
                     falseOption.classList.remove('selected');
                     
-                    // 设置新的选择状态
                     trueOption.classList.add('selected');
                     gameState.userAnswers[gameState.currentQuestionIndex] = 0;
-                    
-                    // 启用提交按钮
                     submitBtn.disabled = false;
-                    
-                    playSound('click');
                 };
                 
                 falseOption.onclick = () => {
@@ -2860,99 +2613,12 @@
                         return;
                     }
                     
-                    // 清除之前的选择状态
                     trueOption.classList.remove('selected');
                     falseOption.classList.remove('selected');
                     
-                    // 设置新的选择状态
                     falseOption.classList.add('selected');
                     gameState.userAnswers[gameState.currentQuestionIndex] = 1;
-                    
-                    // 启用提交按钮
                     submitBtn.disabled = false;
-                    
-                    playSound('click');
-                };
-                
-                // 为判断题选项添加双击提交功能
-                trueOption.ondblclick = function(e) {
-                    if (gameState.questionStatus[gameState.currentQuestionIndex] !== 'unanswered') {
-                        return;
-                    }
-                    
-                    // 清除之前的选择状态
-                    trueOption.classList.remove('selected');
-                    falseOption.classList.remove('selected');
-                    
-                    // 设置新的选择状态
-                    trueOption.classList.add('selected');
-                    gameState.userAnswers[gameState.currentQuestionIndex] = 0;
-                    
-                    // 标记为自动提交
-                    gameState.autoSubmitted = true;
-                    
-                    // 立即提交答案
-                    submitAnswer();
-                    
-                    // 提交后自动跳转到下一题
-                    if (gameState.currentQuestionIndex < gameState.currentQuestions.length - 1) {
-                        setTimeout(() => {
-                            gameState.currentQuestionIndex++;
-                            loadQuestion(gameState.currentQuestionIndex);
-                            gameState.autoSubmitted = false;
-                            
-                            // 如果是第二关或第四关且题目未回答，重新启动计时器
-                            if ((gameState.currentLevel === 2 || gameState.currentLevel === 4) && 
-                                gameState.questionStatus[gameState.currentQuestionIndex] === 'unanswered') {
-                                startTimer();
-                            }
-                        }, 100);
-                    } else {
-                        setTimeout(() => {
-                            finishLevel();
-                            gameState.autoSubmitted = false;
-                        }, 100);
-                    }
-                };
-                
-                falseOption.ondblclick = function(e) {
-                    if (gameState.questionStatus[gameState.currentQuestionIndex] !== 'unanswered') {
-                        return;
-                    }
-                    
-                    // 清除之前的选择状态
-                    trueOption.classList.remove('selected');
-                    falseOption.classList.remove('selected');
-                    
-                    // 设置新的选择状态
-                    falseOption.classList.add('selected');
-                    gameState.userAnswers[gameState.currentQuestionIndex] = 1;
-                    
-                    // 标记为自动提交
-                    gameState.autoSubmitted = true;
-                    
-                    // 立即提交答案
-                    submitAnswer();
-                    
-                    // 提交后自动跳转到下一题
-                    if (gameState.currentQuestionIndex < gameState.currentQuestions.length - 1) {
-                        setTimeout(() => {
-                            gameState.currentQuestionIndex++;
-                            loadQuestion(gameState.currentQuestionIndex);
-                            gameState.autoSubmitted = false;
-                            
-                            // 如果是第二关或第四关且题目未回答，重新启动计时器
-                            if ((gameState.currentLevel === 2 || gameState.currentLevel === 4) && 
-                                gameState.questionStatus[gameState.currentQuestionIndex] === 'unanswered') {
-                                startTimer();
-                            }
-                        }, 100);
-                    } else {
-                        setTimeout(() => {
-                            finishLevel();
-                            gameState.autoSubmitted = false;
-                        }, 100);
-                    }
                 };
                 
                 if (gameState.userAnswers[index] !== null) {
@@ -2985,7 +2651,6 @@
         // 更新按钮状态
         function updateButtonStates() {
             prevBtn.disabled = gameState.currentQuestionIndex === 0;
-            nextBtn.disabled = gameState.currentQuestionIndex === gameState.currentQuestions.length - 1;
         }
 
         // 更新进度显示
@@ -2993,13 +2658,7 @@
             const totalQuestions = gameState.currentQuestions.length;
             const answered = gameState.questionStatus.filter(status => status !== 'unanswered').length;
             
-            // 如果是第一关，显示轮次进度
-            if (gameState.currentLevel === 1) {
-                stageProgressElement.textContent = `${answered}/${totalQuestions}`;
-            } else {
-                stageProgressElement.textContent = `${answered}/${totalQuestions}`;
-            }
-            
+            stageProgressElement.textContent = `${answered}/${totalQuestions}`;
             currentScoreElement.textContent = gameState.score;
             
             if (answered > 0) {
@@ -3016,7 +2675,7 @@
             clearInterval(gameState.timerInterval);
             
             if (gameState.currentLevel === 2) {
-                gameState.timeLeft = 45;
+                gameState.timeLeft = 10; // 第二关改为每题限时10秒
             } else if (gameState.currentLevel === 4) {
                 gameState.timeLeft = 60;
             }
@@ -3039,9 +2698,9 @@
             timerElement.textContent = gameState.timeLeft;
             
             timerContainer.classList.remove('warning', 'danger');
-            if (gameState.timeLeft <= 15 && gameState.timeLeft > 5) {
+            if (gameState.timeLeft <= 5 && gameState.timeLeft > 3) {
                 timerContainer.classList.add('warning');
-            } else if (gameState.timeLeft <= 5) {
+            } else if (gameState.timeLeft <= 3) {
                 timerContainer.classList.add('danger');
             }
         }
@@ -3049,7 +2708,7 @@
         // 处理超时
         function handleTimeout() {
             if (gameState.currentLevel === 2) {
-                gameState.totalTimeUsed += (45 - gameState.timeLeft);
+                gameState.totalTimeUsed += (10 - gameState.timeLeft);
             } else if (gameState.currentLevel === 4) {
                 gameState.totalTimeUsed += (60 - gameState.timeLeft);
             }
@@ -3058,11 +2717,8 @@
             gameState.questionStatus[currentIndex] = 'timeout';
             
             showAnswerResult(currentIndex);
-            
             gameState.answeredCount++;
             updateProgressDisplay();
-            
-            // 记录学习进度
             updateLearningProgress(currentIndex, false);
             
             setTimeout(() => {
@@ -3073,12 +2729,11 @@
                 } else {
                     finishLevel();
                 }
-            }, 2000);
+            }, 1500);
         }
 
-        // 提交答案
-        function submitAnswer() {
-            // 如果当前题目已经回答过，直接返回
+        // 处理提交
+        function handleSubmit() {
             if (gameState.questionStatus[gameState.currentQuestionIndex] !== 'unanswered') {
                 return;
             }
@@ -3087,9 +2742,14 @@
             const question = gameState.currentQuestions[currentIndex];
             const userAnswer = gameState.userAnswers[currentIndex];
             
+            if (userAnswer === null || (question.type === "multiple" && userAnswer.length === 0)) {
+                alert('请先选择一个答案！');
+                return;
+            }
+            
             if (gameState.currentLevel === 2) {
                 clearInterval(gameState.timerInterval);
-                gameState.totalTimeUsed += (45 - gameState.timeLeft);
+                gameState.totalTimeUsed += (10 - gameState.timeLeft);
             } else if (gameState.currentLevel === 4) {
                 clearInterval(gameState.timerInterval);
                 gameState.totalTimeUsed += (60 - gameState.timeLeft);
@@ -3101,20 +2761,9 @@
             if (question.type === "single") {
                 isCorrect = userAnswer === question.correctAnswer;
                 pointsEarned = isCorrect ? 20 : 0;
-                
             } else if (question.type === "true-false") {
                 isCorrect = userAnswer === question.correctAnswer;
-                
-                if (gameState.currentLevel === 1) {
-                    pointsEarned = isCorrect ? 20 : 0;
-                } else if (gameState.currentLevel === 2) {
-                    pointsEarned = isCorrect ? 20 : -10;
-                } else if (gameState.currentLevel === 4) {
-                    pointsEarned = isCorrect ? 20 : 0;
-                } else {
-                    pointsEarned = isCorrect ? 30 : 0;
-                }
-                
+                pointsEarned = isCorrect ? 20 : 0;
             } else if (question.type === "multiple") {
                 const correctAnswers = question.correctAnswer;
                 const userAnswers = userAnswer || [];
@@ -3122,30 +2771,11 @@
                 const sortedCorrect = [...correctAnswers].sort().toString();
                 const sortedUser = [...userAnswers].sort().toString();
                 isCorrect = sortedCorrect === sortedUser;
-                
-                if (gameState.currentLevel === 1) {
-                    if (isCorrect) {
-                        pointsEarned = 20;
-                    } else {
-                        const correctSelected = userAnswers.filter(ans => correctAnswers.includes(ans)).length;
-                        if (correctSelected > 0 && correctSelected < correctAnswers.length) {
-                            pointsEarned = 10;
-                        } else {
-                            pointsEarned = 0;
-                        }
-                    }
-                } else if (gameState.currentLevel === 2) {
-                    pointsEarned = isCorrect ? 20 : 0;
-                } else if (gameState.currentLevel === 4) {
-                    pointsEarned = isCorrect ? 20 : 0;
-                } else {
-                    pointsEarned = isCorrect ? 30 : 0;
-                }
+                pointsEarned = isCorrect ? 20 : 0;
             }
             
             gameState.questionStatus[currentIndex] = isCorrect ? 'correct' : 'wrong';
             gameState.score += pointsEarned;
-            gameState.totalScore += pointsEarned;
             
             if (isCorrect) {
                 gameState.correctCount++;
@@ -3158,7 +2788,6 @@
                         gameState.survivalShields++;
                         gameState.survivalCorrectInRow = 0;
                         updateSurvivalInfo();
-                        playSound('powerup');
                     }
                 }
             } else {
@@ -3168,38 +2797,31 @@
                     gameState.survivalShields--;
                     gameState.questionStatus[currentIndex] = 'shielded';
                     updateSurvivalInfo();
-                    playSound('shield');
                 }
             }
             
             gameState.answeredCount++;
-            
-            // 记录学习进度
             updateLearningProgress(currentIndex, isCorrect);
-            
             showAnswerResult(currentIndex);
             updateProgressDisplay();
             updatePlayerStats();
             
-            playSound(isCorrect ? 'correct' : 'incorrect');
+            submitBtn.disabled = true;
             
-            // 特殊处理：第一关第三轮如果答错且没有护盾，直接结束
-            if (gameState.currentLevel === 3 && 
-                gameState.questionStatus[currentIndex] === 'wrong' && 
-                gameState.survivalShields === 0) {
-                setTimeout(() => {
+            // 提交答案后自动跳转
+            setTimeout(() => {
+                if (currentIndex < gameState.currentQuestions.length - 1) {
+                    gameState.currentQuestionIndex++;
+                    loadQuestion(gameState.currentQuestionIndex);
+                    
+                    if ((gameState.currentLevel === 2 || gameState.currentLevel === 4) && 
+                        gameState.questionStatus[gameState.currentQuestionIndex] === 'unanswered') {
+                        startTimer();
+                    }
+                } else {
                     finishLevel();
-                }, 2000);
-                return;
-            }
-            
-            // 如果这是自动提交，不要禁用提交按钮
-            if (!gameState.autoSubmitted) {
-                setTimeout(() => {
-                    submitBtn.disabled = true;
-                    nextBtn.disabled = false;
-                }, 100);
-            }
+                }
+            }, 1500);
         }
 
         // 更新学习进度
@@ -3207,41 +2829,32 @@
             const question = gameState.currentQuestions[questionIndex];
             
             if (gameState.currentLevel === 1) {
-                // 更新轮次进度
                 const roundProgress = gameState.roundProgress[gameState.currentRound];
-                
                 roundProgress.answeredQuestions++;
                 if (isCorrect) {
                     roundProgress.correctQuestions++;
                 } else {
-                    // 记录错题
                     if (!roundProgress.wrongQuestions.includes(question.id)) {
                         roundProgress.wrongQuestions.push(question.id);
                     }
                 }
-                
-                // 计算完成度和正确率
                 roundProgress.completionRate = Math.min(100, Math.round((roundProgress.answeredQuestions / roundProgress.totalQuestions) * 100));
                 if (roundProgress.answeredQuestions > 0) {
                     roundProgress.accuracy = Math.round((roundProgress.correctQuestions / roundProgress.answeredQuestions) * 100);
                 }
             }
             
-            // 更新关卡进度
             const levelProgress = gameState.levelProgress[gameState.currentLevel];
-            
             if (!levelProgress) return;
             
             levelProgress.answeredQuestions++;
             if (isCorrect) {
                 levelProgress.correctQuestions++;
             } else {
-                // 记录错题
                 if (!levelProgress.wrongQuestions.includes(question.id)) {
                     levelProgress.wrongQuestions.push(question.id);
                 }
                 
-                // 初始化错题重做记录
                 if (!levelProgress.wrongQuestionRetry[question.id]) {
                     levelProgress.wrongQuestionRetry[question.id] = {
                         correctCount: 0,
@@ -3249,19 +2862,16 @@
                     };
                 }
                 
-                // 记录错误答案
                 levelProgress.wrongQuestionRetry[question.id].lastAnswer = "wrong";
-                levelProgress.wrongQuestionRetry[question.id].correctCount = 0; // 错误时重置连续正确计数
+                levelProgress.wrongQuestionRetry[question.id].correctCount = 0;
             }
             
-            // 如果是正确答案且是错题重做
             if (isCorrect && levelProgress.wrongQuestions.includes(question.id)) {
                 const retryRecord = levelProgress.wrongQuestionRetry[question.id];
                 if (retryRecord) {
                     retryRecord.lastAnswer = "correct";
                     retryRecord.correctCount++;
                     
-                    // 如果连续答对两次，从错题列表中移除
                     if (retryRecord.correctCount >= 2) {
                         const index = levelProgress.wrongQuestions.indexOf(question.id);
                         if (index > -1) {
@@ -3271,13 +2881,11 @@
                 }
             }
             
-            // 计算完成度和正确率
             levelProgress.completionRate = Math.min(100, Math.round((levelProgress.answeredQuestions / levelProgress.totalQuestions) * 100));
             if (levelProgress.answeredQuestions > 0) {
                 levelProgress.accuracy = Math.round((levelProgress.correctQuestions / levelProgress.answeredQuestions) * 100);
             }
             
-            // 更新显示
             completionRateElement.textContent = `${levelProgress.completionRate}%`;
         }
 
@@ -3313,7 +2921,6 @@
                 options.forEach(opt => {
                     opt.style.pointerEvents = 'none';
                 });
-                
             } else if (question.type === "true-false") {
                 if (question.correctAnswer === 0) {
                     trueOption.classList.add('correct');
@@ -3335,13 +2942,12 @@
         // 更新第三关生存信息
         function updateSurvivalInfo() {
             survivalRoundElement.textContent = gameState.survivalRound;
-            
             shield1.classList.toggle('active', gameState.survivalShields >= 1);
             shield2.classList.toggle('active', gameState.survivalShields >= 2);
             shield3.classList.toggle('active', gameState.survivalShields >= 3);
         }
 
-        // 完成关卡/轮次
+        // 完成关卡
         function finishLevel() {
             clearInterval(gameState.timerInterval);
             
@@ -3353,26 +2959,19 @@
             let rewards = { gold: 0, stars: 0 };
             
             if (gameState.currentLevel === 1) {
-                // 第一关：检查轮次完成情况
                 const roundProgress = gameState.roundProgress[gameState.currentRound];
                 roundProgress.passed = accuracy >= 70;
                 passed = roundProgress.passed;
-                
-                // 记录结束时间和用时
                 roundProgress.endTime = Date.now();
                 roundProgress.timeUsed = Math.round((roundProgress.endTime - roundProgress.startTime) / 1000);
                 
                 if (passed) {
-                    // 解锁下一轮
                     if (gameState.currentRound < 3) {
                         gameState.roundProgress[gameState.currentRound + 1].unlocked = true;
                     }
-                    
-                    // 给予奖励
                     rewards.gold = Math.floor(accuracy / 10) * 5;
                     gameState.goldCoins += rewards.gold;
                     
-                    // 如果完成第三轮，检查是否解锁第二关
                     if (gameState.currentRound === 3) {
                         const round1Passed = gameState.roundProgress[1].passed;
                         const round2Passed = gameState.roundProgress[2].passed;
@@ -3385,38 +2984,26 @@
                     }
                 }
             } else if (gameState.currentLevel === 2) {
-                const timeCondition = gameState.totalTimeUsed < 360;
-                passed = accuracy >= 70 && timeCondition;
-                
+                passed = accuracy >= 70;
                 if (passed) {
                     let starReward = Math.floor(accuracy / 10);
-                    if (timeCondition) starReward += 2;
-                    
                     rewards.stars = starReward;
                     gameState.wisdomStars += rewards.stars;
-                    
-                    // 检查是否满足解锁条件
                     gameState.levelUnlocked[2] = true;
                     updateLevelStatus();
                 }
             } else if (gameState.currentLevel === 3) {
                 passed = correctCount >= 10;
-                
                 if (passed) {
                     rewards.stars = Math.floor(correctCount / 2);
                     gameState.wisdomStars += rewards.stars;
-                    
-                    // 检查是否满足解锁条件
                     gameState.levelUnlocked[3] = true;
                     updateLevelStatus();
                 }
             } else if (gameState.currentLevel === 4) {
-                // 记录结束时间和用时
                 const levelProgress = gameState.levelProgress[4];
                 levelProgress.endTime = Date.now();
                 levelProgress.timeUsed = Math.round((levelProgress.endTime - levelProgress.startTime) / 1000);
-                
-                // 第四关：60秒内完成40题即为成功
                 passed = correctCount >= 30 && levelProgress.timeUsed <= 60;
                 
                 if (passed) {
@@ -3428,6 +3015,8 @@
             }
             
             showLevelResult(passed, accuracy, rewards);
+            updatePlayerStats();
+            updateLevelStatus();
         }
 
         // 显示关卡结果
@@ -3476,7 +3065,6 @@
                     </div>
             `;
             
-            // 显示用时
             if (gameState.currentLevel === 1) {
                 const roundProgress = gameState.roundProgress[gameState.currentRound];
                 const timeUsed = roundProgress.timeUsed || 0;
@@ -3508,7 +3096,6 @@
                 `;
             }
             
-            // 显示学习进度
             if (gameState.currentLevel === 1) {
                 const roundProgress = gameState.roundProgress[gameState.currentRound];
                 resultHTML += `
@@ -3558,11 +3145,8 @@
             
             resultHTML += `</div>`;
             
-            // 显示下一步选项
             if (gameState.currentLevel === 1) {
-                // 第一关：根据答对率显示不同选项
                 if (passed) {
-                    // 答对率>=70%，可以选择继续闯关或错题训练
                     resultHTML += `
                         <div style="margin-top: 30px;">
                             <button class="btn btn-success" id="continue-round-btn">
@@ -3577,7 +3161,6 @@
                         </div>
                     `;
                 } else {
-                    // 答对率<70%，只能进入错题训练
                     resultHTML += `
                         <div style="background: #ffebee; border-radius: 12px; padding: 20px; margin: 20px auto; max-width: 550px; text-align: center;">
                             <div style="font-weight: bold; color: #f44336; margin-bottom: 10px;">
@@ -3598,7 +3181,6 @@
                     `;
                 }
             } else {
-                // 第二关和第三关、第四关
                 resultHTML += `
                     <div style="margin-top: 25px;">
                         <button class="btn btn-success" id="next-level-btn" ${passed && gameState.levelUnlocked[gameState.currentLevel] ? '' : 'disabled'}>
@@ -3613,7 +3195,6 @@
             
             resultScreenElement.innerHTML = resultHTML;
             
-            // 绑定按钮事件
             if (gameState.currentLevel === 1) {
                 if (passed && gameState.currentRound < 3) {
                     document.getElementById('continue-round-btn').onclick = () => {
@@ -3636,16 +3217,10 @@
                 
                 document.getElementById('back-to-home-btn').onclick = loadHomeScreen;
             }
-            
-            updatePlayerStats();
-            updateLevelStatus();
-            
-            playSound(passed ? 'win' : 'lose');
         }
 
         // 开始错题训练
         function startWrongQuestionsTraining() {
-            // 获取当前轮次的错题
             const roundProgress = gameState.roundProgress[gameState.currentRound];
             const wrongQuestionIds = roundProgress.wrongQuestions;
             
@@ -3655,10 +3230,7 @@
                 return;
             }
             
-            // 从题库中获取错题
             gameState.currentQuestions = questionBank.filter(q => wrongQuestionIds.includes(q.id));
-            
-            // 重置游戏状态
             gameState.currentQuestionIndex = 0;
             gameState.score = 0;
             gameState.correctCount = 0;
@@ -3675,14 +3247,11 @@
             resultScreen.style.display = 'none';
             gameScreen.style.display = 'block';
             
-            // 更新UI显示为错题训练模式
             document.getElementById('current-level-name').textContent = '错题训练';
             roundIndicator.textContent = `第${gameState.currentRound}轮`;
             stageProgressElement.textContent = `1/${gameState.currentQuestions.length}`;
             currentScoreElement.textContent = gameState.score;
             accuracyElement.textContent = '0%';
-            
-            operationHint.innerHTML = '<i class="fas fa-book-medical"></i> 错题训练模式 • 单击选中，双击提交答案';
             
             loadQuestion(0);
         }
@@ -3694,7 +3263,6 @@
             resultScreen.style.display = 'none';
             wrongQuestionsScreen.style.display = 'block';
             
-            // 收集所有错题
             let allWrongQuestions = [];
             for (let level = 1; level <= 4; level++) {
                 const progress = gameState.levelProgress[level];
@@ -3702,7 +3270,6 @@
                     progress.wrongQuestions.forEach(questionId => {
                         const question = questionBank.find(q => q.id === questionId);
                         if (question) {
-                            // 获取重做记录
                             const retryRecord = progress.wrongQuestionRetry[questionId];
                             const retryCount = retryRecord ? retryRecord.correctCount : 0;
                             
@@ -3750,7 +3317,6 @@
                     optionsHTML += "</div>";
                 }
                 
-                // 重做进度显示
                 let retryProgressHTML = "";
                 if (item.needRetry) {
                     retryProgressHTML = `
@@ -3798,137 +3364,6 @@
             
             wrongQuestionsList.innerHTML = wrongQuestionsHTML;
         }
-
-        // 音效系统
-        function playSound(type) {
-            // 在实际应用中，可以添加音效文件
-            console.log(`播放音效: ${type}`);
-        }
-
-        // ==================== 事件监听 ====================
-
-        startLevel1Btn.addEventListener('click', startLevel1);
-        startLevel2Btn.addEventListener('click', () => startLevel(2));
-        startLevel3Btn.addEventListener('click', () => startLevel(3));
-        startLevel4Btn.addEventListener('click', () => startLevel(4));
-
-        viewWrongQuestionsBtn.addEventListener('click', loadWrongQuestions);
-        backToHomeFromRoundsBtn.addEventListener('click', loadHomeScreen);
-
-        // 提交按钮
-        submitBtn.addEventListener('click', () => {
-            // 如果当前题目已经回答过，直接返回
-            if (gameState.questionStatus[gameState.currentQuestionIndex] !== 'unanswered') {
-                return;
-            }
-            
-            // 如果没有选择答案，直接返回
-            if (gameState.userAnswers[gameState.currentQuestionIndex] === null) {
-                return;
-            }
-            
-            // 提交答案
-            submitAnswer();
-        });
-
-        // 下一题按钮
-        nextBtn.addEventListener('click', () => {
-            // 如果当前正在自动跳转，直接返回
-            if (gameState.isAutoTransitioning) {
-                return;
-            }
-            
-            const currentIndex = gameState.currentQuestionIndex;
-            const currentStatus = gameState.questionStatus[currentIndex];
-            
-            // 如果当前题目已经回答过，直接跳转到下一题
-            if (currentStatus !== 'unanswered') {
-                if (currentIndex < gameState.currentQuestions.length - 1) {
-                    gameState.currentQuestionIndex++;
-                    loadQuestion(gameState.currentQuestionIndex);
-                    
-                    if ((gameState.currentLevel === 2 || gameState.currentLevel === 4) && 
-                        gameState.questionStatus[gameState.currentQuestionIndex] === 'unanswered') {
-                        startTimer();
-                    }
-                } else {
-                    finishLevel();
-                }
-            } 
-            // 如果当前题目未回答但有选择答案，则先提交再跳转
-            else if (gameState.userAnswers[currentIndex] !== null) {
-                // 标记为自动提交
-                gameState.autoSubmitted = true;
-                
-                // 提交答案
-                submitAnswer();
-                
-                // 设置延迟跳转
-                setTimeout(() => {
-                    if (currentIndex < gameState.currentQuestions.length - 1) {
-                        gameState.currentQuestionIndex++;
-                        loadQuestion(gameState.currentQuestionIndex);
-                        
-                        // 如果是第二关或第四关且题目未回答，重新启动计时器
-                        if ((gameState.currentLevel === 2 || gameState.currentLevel === 4) && 
-                            gameState.questionStatus[gameState.currentQuestionIndex] === 'unanswered') {
-                            startTimer();
-                        }
-                    } else {
-                        finishLevel();
-                    }
-                    
-                    // 重置标记
-                    gameState.autoSubmitted = false;
-                }, 100);
-            }
-            // 如果当前题目未回答且没有选择答案，直接跳转
-            else {
-                if (currentIndex < gameState.currentQuestions.length - 1) {
-                    gameState.currentQuestionIndex++;
-                    loadQuestion(gameState.currentQuestionIndex);
-                    
-                    if ((gameState.currentLevel === 2 || gameState.currentLevel === 4) && 
-                        gameState.questionStatus[gameState.currentQuestionIndex] === 'unanswered') {
-                        startTimer();
-                    }
-                } else {
-                    finishLevel();
-                }
-            }
-        });
-
-        prevBtn.addEventListener('click', () => {
-            if (gameState.currentQuestionIndex > 0) {
-                gameState.currentQuestionIndex--;
-                loadQuestion(gameState.currentQuestionIndex);
-                
-                if ((gameState.currentLevel === 2 || gameState.currentLevel === 4) && 
-                    gameState.questionStatus[gameState.currentQuestionIndex] === 'unanswered') {
-                    startTimer();
-                }
-            }
-        });
-
-        backToHomeFromWrongBtn.addEventListener('click', loadHomeScreen);
-
-        document.querySelectorAll('.level-item').forEach(item => {
-            item.addEventListener('click', function() {
-                const level = parseInt(this.getAttribute('data-level'));
-                if (gameState.levelUnlocked[level - 1]) {
-                    document.querySelectorAll('.level-item').forEach(i => {
-                        i.classList.remove('active');
-                    });
-                    this.classList.add('active');
-                    
-                    if (homeScreen.style.display !== 'block') {
-                        loadHomeScreen();
-                    }
-                } else {
-                    alert(`第${level}关尚未解锁！\n\n解锁条件：\n1. 完成前一关所有题目且正确率>70%\n\n请继续努力！`);
-                }
-            });
-        });
 
         // ==================== 初始化游戏 ====================
         initGame();
